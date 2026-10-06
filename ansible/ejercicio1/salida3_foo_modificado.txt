@@ -1,0 +1,22 @@
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [nodo1]
+
+TASK [Actualizamos el sistema] *************************************************
+ok: [nodo1]
+
+TASK [Instalar paquetes con apt] ***********************************************
+ok: [nodo1] => (item=git)
+ok: [nodo1] => (item=apache2)
+
+TASK [Copiar fichero a la máquina remota] **************************************
+changed: [nodo1]
+
+TASK [Copiar un template a un fichero de la máquina remota] ********************
+ok: [nodo1]
+
+PLAY RECAP *********************************************************************
+nodo1                      : ok=5    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
