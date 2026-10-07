@@ -1,0 +1,52 @@
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [bd1]
+ok: [web1]
+
+TASK [commons : Actualizamos el sistema] ***************************************
+ok: [web1]
+ok: [bd1]
+
+PLAY [servidores_web] **********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [web1]
+
+TASK [apache2 : ensure apache2 is installed] ***********************************
+ok: [web1]
+
+TASK [apache2 : copy template index] *******************************************
+ok: [web1]
+
+TASK [apache2 : Copiar fichero al servidor remoto] *****************************
+ok: [web1]
+
+TASK [apache2 : Copiar fichero de configuración y reiniciar el servicio] *******
+changed: [web1]
+
+RUNNING HANDLER [apache2 : restart apache2] ************************************
+changed: [web1]
+
+PLAY [servidores_bd] ***********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [bd1]
+
+TASK [mariadb : ensure mariadb is installed] ***********************************
+ok: [bd1]
+
+TASK [mariadb : create database wordpress] *************************************
+ok: [bd1]
+
+TASK [mariadb : create user mysql wordpress] ***********************************
+ok: [bd1] => (item=localhost)
+
+TASK [mariadb : mariadb listen in all interfaces] ******************************
+ok: [bd1]
+
+PLAY RECAP *********************************************************************
+bd1                        : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web1                       : ok=8    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
